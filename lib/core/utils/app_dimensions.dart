@@ -1,4 +1,4 @@
-import 'dart:developer';
+// import 'dart:developer';
 
 import 'package:flutter/material.dart';
 
@@ -10,6 +10,6 @@ class AppDimensions {
     final mediaQuery = MediaQuery.of(context);
     screenWidth = mediaQuery.size.width;
     screenHeight = mediaQuery.size.height;
-     log('Screen Dimensions Initialized: Width = $screenWidth, Height = $screenHeight');
   }
+    //  log('Screen Dimensions Initialized: Width = $screenWidth, Height = $screenHeight');
 }
