@@ -7,10 +7,15 @@ class TextStyles {
 
   static const TextStyle styleRegular10 = TextStyle(
     fontFamily: _fontFamily,
+
     fontWeight: FontWeight.w400,
     fontSize: 10,
   );
-
+static const TextStyle styleRegular14 = TextStyle(
+    fontFamily: _fontFamily,
+    fontWeight: FontWeight.w400,
+    fontSize: 14,
+  );
   static const TextStyle styleRegular12 = TextStyle(
     fontFamily: _fontFamily,
     fontWeight: FontWeight.w400,

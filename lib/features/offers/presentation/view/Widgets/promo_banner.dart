@@ -1,35 +1,38 @@
-
 import 'package:flutter/material.dart';
 import 'package:otex_app_test/core/app_colors.dart';
 import 'package:otex_app_test/core/assets_images.dart';
 import 'package:otex_app_test/core/text_styles.dart';
+import 'package:otex_app_test/core/utils/app_dimensions.dart';
 
 class PromoBanner extends StatelessWidget {
   const PromoBanner({super.key});
 
   @override
   Widget build(BuildContext context) {
+    AppDimensions.init(context);
+    final double screenWidth = AppDimensions.screenWidth;
+    final double screenHeight = AppDimensions.screenHeight;
+
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+      padding: EdgeInsets.symmetric(horizontal: screenWidth * (16 / 375)),
       child: Container(
-        width: 328,
-        height: 32,
+        width: screenWidth * (328 / 375),
+        height: screenHeight * (32 / 812),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8),
-          color: AppColors.orange.withOpacity(.5),
+          borderRadius: BorderRadius.circular(screenWidth * (8 / 375)),
+          color: AppColors.orange.withOpacity(0.5),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 8),
-              child: Text(
+              padding: EdgeInsets.symmetric(horizontal: screenWidth * (8 / 375)),
+              child: const Text(
                 '! لأى عرض تطلبه دلوقتى ',
                 style: TextStyles.styleRegular10,
               ),
             ),
             Row(
-              spacing: 4,
               children: [
                 Text(
                   'شحن مجاني',
@@ -37,12 +40,13 @@ class PromoBanner extends StatelessWidget {
                     color: AppColors.green,
                   ),
                 ),
+                SizedBox(width: screenWidth * (4 / 375)),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 12.28),
+                  padding: EdgeInsets.symmetric(horizontal: screenWidth * (12.28 / 375)),
                   child: Image.asset(
-                    height: 11.225000381469727,
-                    width: 15.463000297546387,
                     Assets.assetsImagesCheck,
+                    height: screenHeight * (11.22 / 812),
+                    width: screenWidth * (15.46 / 375),
                   ),
                 ),
               ],

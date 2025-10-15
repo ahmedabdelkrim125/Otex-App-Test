@@ -3,51 +3,54 @@ import 'package:flutter_svg/svg.dart';
 import 'package:otex_app_test/core/app_colors.dart';
 import 'package:otex_app_test/core/assets_images.dart';
 import 'package:otex_app_test/core/text_styles.dart';
+import 'package:otex_app_test/core/utils/app_dimensions.dart';
 
 class ProductCard extends StatelessWidget {
-  const ProductCard({super.key,required this.assetsImages});
-final String  assetsImages;
+  const ProductCard({super.key, required this.assetsImages});
+  final String assetsImages;
   @override
   Widget build(BuildContext context) {
+    AppDimensions.init(context);
+    final double screenWidth = AppDimensions.screenWidth;
+    final double screenHeight = AppDimensions.screenHeight;
+
     return Stack(
       children: [
         Container(
-          height: 215,
-          width: 158,
+          height: screenHeight * (215 / 812),
+          width: screenWidth * (158 / 375),
           decoration: BoxDecoration(
             color: AppColors.black.withOpacity(0.05),
           ),
           child: Center(
             child: Image.asset(
-              //here
               assetsImages,
             ),
           ),
         ),
         Container(
-          width: 158,
-          height: 360,
+          width: screenWidth * (158 / 375),
+          height: screenHeight * (360 / 812),
           decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(screenWidth * (5 / 375)),
             border: Border.all(
-              color: AppColors.darkBluePure.withOpacity(.1),
+              color: AppColors.darkBluePure.withOpacity(0.1),
             ),
           ),
           child: Column(
             children: [
-              SizedBox(height: 230),
+              SizedBox(height: screenHeight * (230 / 812)),
               Column(
                 children: [
                   SizedBox(
-                    width: 158,
+                    width: screenWidth * (158 / 375),
                     child: Row(
                       children: [
                         SvgPicture.asset(Assets.assetsImagesVector),
-                        Expanded(
+                        const Expanded(
                           child: Text(
-                            
                             'جاكيت من الصوف مناسب',
-                            style: TextStyles.styleMedium14
-                                .copyWith(color: AppColors.darkBlue),
+                            style: TextStyles.styleMedium14,
                             overflow: TextOverflow.ellipsis,
                             textAlign: TextAlign.start,
                             maxLines: 1,
@@ -58,22 +61,20 @@ final String  assetsImages;
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 4),
+                    padding: EdgeInsets.symmetric(horizontal: screenWidth * (4 / 375)),
                     child: SizedBox(
-                      width: 158,
+                      width: screenWidth * (158 / 375),
                       child: Row(
                         children: [
-                          Icon(Icons.favorite_border),
+                          const Icon(Icons.favorite_border),
                           Expanded(
                             child: Row(
                               children: [
                                 Expanded(
                                   child: Text(
-                                    
                                     '60,000,000',
                                     style: TextStyle(
-                                      color:
-                                          AppColors.darkBlue.withOpacity(0.5),
+                                      color: AppColors.darkBlue.withOpacity(0.5),
                                       decoration: TextDecoration.lineThrough,
                                     ),
                                     overflow: TextOverflow.ellipsis,
@@ -88,11 +89,11 @@ final String  assetsImages;
                                 ),
                                 Row(
                                   children: [
-                                    Text(
+                                    const Text(
                                       'جم',
                                       style: TextStyle(color: AppColors.error),
                                     ),
-                                    Text(
+                                    const Text(
                                       '32,000,000',
                                       style: TextStyle(color: AppColors.error),
                                     ),
@@ -105,48 +106,48 @@ final String  assetsImages;
                       ),
                     ),
                   ),
-                  SizedBox(height: 9),
+                  SizedBox(height: screenHeight * (9 / 812)),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    padding: EdgeInsets.symmetric(horizontal: screenWidth * (10 / 375)),
                     child: Row(
-                      spacing: 6,
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        Text('+3.3k تم بيع'),
+                        const Text('+3.3k تم بيع'),
+                        SizedBox(width: screenWidth * (6 / 375)),
                         SvgPicture.asset(
                           Assets.assetsImagesFire,
-                          width: 15,
-                          height: 15,
+                          width: screenWidth * (15 / 375),
+                          height: screenWidth * (15 / 375),
                         ),
                       ],
                     ),
                   ),
-                  SizedBox(height: 20),
+                  SizedBox(height: screenHeight * (20 / 812)),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       Padding(
-                        padding: EdgeInsets.only(right: 8),
+                        padding: EdgeInsets.only(right: screenWidth * (8 / 375)),
                         child: Row(
-                          spacing: 8,
                           children: [
                             Image.asset(
                               Assets.assetsImagesLogo,
-                              width: 24,
-                              height: 24,
+                              width: screenWidth * (24 / 375),
+                              height: screenWidth * (24 / 375),
                             ),
+                            SizedBox(width: screenWidth * (8 / 375)),
                             SvgPicture.asset(
                               Assets.assetsImagesAddToCart,
-                              width: 24,
-                              height: 24,
+                              width: screenWidth * (24 / 375),
+                              height: screenWidth * (24 / 375),
                             ),
                           ],
                         ),
                       ),
                       SvgPicture.asset(
                         Assets.assetsImagesCompanyBadge,
-                        width: 24,
-                        height: 24,
+                        width: screenWidth * (24 / 375),
+                        height: screenWidth * (24 / 375),
                       ),
                     ],
                   )

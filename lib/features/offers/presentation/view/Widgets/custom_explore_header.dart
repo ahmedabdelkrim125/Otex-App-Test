@@ -1,31 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:otex_app_test/core/app_colors.dart';
+import 'package:otex_app_test/core/routing/routes_names.dart';
 import 'package:otex_app_test/core/text_styles.dart';
+import 'package:otex_app_test/core/utils/app_dimensions.dart';
 
 class CustomExploreHeader extends StatelessWidget {
   const CustomExploreHeader({super.key});
 
   @override
   Widget build(BuildContext context) {
+    AppDimensions.init(context);
+    final double screenWidth = AppDimensions.screenWidth;
+
     return Row(
-      spacing: 12,
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             IconButton(
-              onPressed: () {},
+              onPressed: () => context.push(RoutesNames.filtering),
               icon: Icon(
                 Icons.arrow_back,
-                size: 24,
-                color: AppColors.blackWithOpacity50.withOpacity(.5),
+                size: screenWidth * (24 / 375),
+                color: AppColors.blackWithOpacity50.withOpacity(0.5),
               ),
             ),
             Text(
               'الكل',
               style: TextStyles.styleBold16.copyWith(
-                color: AppColors.blackWithOpacity50.withOpacity(.5),
+                color: AppColors.blackWithOpacity50.withOpacity(0.5),
               ),
             ),
           ],

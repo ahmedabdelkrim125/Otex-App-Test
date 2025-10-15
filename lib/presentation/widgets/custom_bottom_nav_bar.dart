@@ -12,14 +12,14 @@ class CustomBottomNavBar extends StatelessWidget {
     return BlocBuilder<BottomNavCubit, int>(
       builder: (context, selectedIndex) {
         return Container(
-          height: 75,
+          height: 85,
           decoration: BoxDecoration(
             color: Colors.white,
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.05),
-                blurRadius: 10,
-                offset: const Offset(0, -3),
+                color: Colors.black.withOpacity(0.06),
+                blurRadius: 12,
+                offset: const Offset(0, -2),
               ),
             ],
           ),
@@ -81,30 +81,44 @@ class CustomBottomNavBar extends StatelessWidget {
       child: GestureDetector(
         onTap: () => context.read<BottomNavCubit>().changeIndex(index),
         behavior: HitTestBehavior.opaque,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            CustomPaint(
-              size: const Size(40, 5),
-              painter: isSelected
-                  ? _CurvedIndicatorPainter(color: AppColors.primary)
-                  : null,
-            ),
-            const SizedBox(height: 6),
-            Icon(
-              icon,
-              color: isSelected ? AppColors.darkBlue : const Color(0xffA1A7B4),
-              size: 28,
-            ),
-            const SizedBox(height: 4),
-            Text(
-              label,
-              style: isSelected
-                  ? TextStyles.styleBold14.copyWith(color: AppColors.primary)
-                  : TextStyles.styleRegular12
-                      .copyWith(color: const Color(0xffA1A7B4)),
-            ),
-          ],
+        child: Container(
+          padding: const EdgeInsets.only(top: 8, bottom: 4),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(
+                icon,
+                color: isSelected ? AppColors.primary : const Color(0xffA1A7B4),
+                size: 27,
+              ),
+              const SizedBox(height: 6),
+              Text(
+                label,
+                style: isSelected
+                    ? TextStyles.styleBold14.copyWith(
+                        color: AppColors.primary,
+                        fontSize: 13,
+                      )
+                    : TextStyles.styleRegular12.copyWith(
+                        color: const Color(0xffA1A7B4),
+                        fontSize: 12,
+                      ),
+              ),
+              const SizedBox(height: 6),
+              SizedBox(
+                height: 4,
+                child: isSelected
+                    ? CustomPaint(
+                        size: const Size(55, 4),
+                        painter: _CurvedIndicatorPainter(
+                          color: Colors.black,
+                        ),
+                      )
+                    : const SizedBox.shrink(),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -113,6 +127,7 @@ class CustomBottomNavBar extends StatelessWidget {
 
 class _CurvedIndicatorPainter extends CustomPainter {
   final Color color;
+
   _CurvedIndicatorPainter({required this.color});
 
   @override
@@ -120,15 +135,27 @@ class _CurvedIndicatorPainter extends CustomPainter {
     final paint = Paint()
       ..color = color
       ..style = PaintingStyle.stroke
-      ..strokeWidth = 2.5;
+      ..strokeWidth = 2.5
+      ..strokeCap = StrokeCap.round;
 
     final path = Path();
-    const double curveHeight = 4.0;
+    const double curveDepth = 4.0;
 
-    path.moveTo(0, size.height);
-    path.quadraticBezierTo(0, 0, curveHeight, 0);
-    path.lineTo(size.width - curveHeight, 0);
-    path.quadraticBezierTo(size.width, 0, size.width, size.height);
+    path.moveTo(0, 0);
+
+    path.quadraticBezierTo(
+      size.width * 0.25,
+      curveDepth,
+      size.width * 0.5,
+      curveDepth,
+    );
+
+    path.quadraticBezierTo(
+      size.width * 0.75,
+      curveDepth,
+      size.width,
+      0,
+    );
 
     canvas.drawPath(path, paint);
   }
@@ -138,4 +165,3 @@ class _CurvedIndicatorPainter extends CustomPainter {
     return false;
   }
 }
-

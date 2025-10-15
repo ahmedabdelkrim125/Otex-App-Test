@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:otex_app_test/core/app_colors.dart';
-import 'package:otex_app_test/core/text_styles.dart' show TextStyles;
+import 'package:otex_app_test/core/text_styles.dart';
+import 'package:otex_app_test/core/utils/app_dimensions.dart';
 import 'package:otex_app_test/logic/category_cubit.dart';
 
 class CategoriesListView extends StatelessWidget {
@@ -14,10 +15,15 @@ class CategoriesListView extends StatelessWidget {
     'ملابس',
     'كل العروض',
   ];
+
   @override
   Widget build(BuildContext context) {
+    AppDimensions.init(context);
+    final double screenWidth = AppDimensions.screenWidth;
+    final double screenHeight = AppDimensions.screenHeight;
+
     return SizedBox(
-      height: 45,
+      height: screenHeight * (45 / 812),
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: categories.length,
@@ -29,12 +35,13 @@ class CategoriesListView extends StatelessWidget {
               onTap: () => context.read<CategoryCubit>().selectCategory(index),
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 300),
-                margin: const EdgeInsets.only(left: 10),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                margin: EdgeInsets.only(left: screenWidth * (10 / 375)),
+                padding: EdgeInsets.symmetric(
+                    horizontal: screenWidth * (20 / 375),
+                    vertical: screenHeight * (10 / 812)),
                 decoration: BoxDecoration(
                   color: isSelected ? const Color(0x0DF95B1C) : Colors.white,
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(screenWidth * (8 / 375)),
                   border: Border.all(
                     color: isSelected ? AppColors.orange : Colors.grey.shade300,
                     width: 1.5,
@@ -48,7 +55,7 @@ class CategoriesListView extends StatelessWidget {
                             .copyWith(color: AppColors.orange)
                         : TextStyles.styleMedium14.copyWith(
                             color:
-                                AppColors.darkBlueWithOpacity50.withOpacity(.5),
+                                AppColors.darkBlueWithOpacity50.withOpacity(0.5),
                           ),
                   ),
                 ),
